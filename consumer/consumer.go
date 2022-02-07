@@ -68,6 +68,7 @@ func ConsumerInit () {
             log.Printf("Received message")
             log.Printf(" > %s\n", message.Body)
 
+            // Should be better create 3 queues and send the notification to another queue
             if (!service.Notify(message.Body)) {
                 
                 time.Sleep(5 * time.Second)
@@ -77,10 +78,12 @@ func ConsumerInit () {
                     // Last try
                     time.Sleep(15 * time.Second)
                     log.Printf("Retring after 15 seconds")
-                    service.Notify(message.Body)
+                    
+                    if (!service.Notify(message.Body)) {
+                        log.Printf("Message thrown away")
+                    }
                 }
             }
-
         }
     }()
 
