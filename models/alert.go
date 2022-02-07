@@ -1,7 +1,10 @@
 package models
 
+import "gorm.io/gorm"
+
 type Alert struct {
-	ID          int    `json:"id" gorm:"primaryKey"`
-	FleetID   	int	`json:"fleet"`
+	gorm.Model
 	Webhook 	string  `json:"webhook"`
+	FleetID		int 	`json:"fleet_id"`
+	Fleet		Fleet	`json:"fleet"`
 }

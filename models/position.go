@@ -1,15 +1,33 @@
 package models
 
 import (
-	"time"
+	"gorm.io/gorm"
 )
 
 type Position struct {
-	ID          	int		`json:"id" gorm:"primaryKey"`
+	gorm.Model
 	Latitude		float32		`json:"latitude"`
 	Longitude		float32 	`json:"longitude"`
-	CurrentSpeed	int			`json:"current_speed"`
-	MaxSpeed		int			`json:"max_speed"`
-	CreatedAt		time.Time 	`json:"timestamp"`
-	Vehicle			int		`json:"vehicle"`
+	CurrentSpeed	float32		`json:"current_speed"`
+	MaxSpeed		float32		`json:"max_speed"`
+	Timestamp		string		`json:"timestamp"`
+	VehicleID		int			`json:"vehicle_id"`
+	// Vehicle			Vehicle	
 }
+
+// func (position *Position ) AfterCreate(tx *gorm.DB) (err error) {
+	
+// 	if position.CurrentSpeed > position.MaxSpeed {
+// 	// || ( position.CurrentSpeed > position.Vehicle.MaxSpeed) {
+
+		
+// 		message := amqp.Publishing {
+// 			ContentType: "application/json",
+// 			Body: []byte(gin.H{position}),
+// 		}
+
+// 		Publisher(message)
+// 	}
+
+// 	return
+// }

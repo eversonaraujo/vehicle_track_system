@@ -1,7 +1,9 @@
 package models
 
+import "gorm.io/gorm"
+
 type Fleet struct {
-	ID          int		`json:"id" gorm:"primaryKey"`
+	gorm.Model
 	Name		string		`json:"name"`
-	Max_Speed	float32		`json:"max_speed"`
+	MaxSpeed	float32		`json:"max_speed"`
 }

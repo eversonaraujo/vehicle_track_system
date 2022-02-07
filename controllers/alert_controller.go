@@ -8,6 +8,7 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+// /fleet/{FLEET_ID}/alerts to see all alerts from this Fleet
 func AlertList (c *gin.Context) {
 	
 	alerts := []models.Alert{}
@@ -44,7 +45,7 @@ func AlertCreate (c *gin.Context) {
 	// Don`t forget the validation
 	var alert models.Alert
 	err = c.ShouldBindJSON(&alert)
-	alert.FleetID = fleetID
+	alert.FleetID = int(fleet.ID)
 
 	if err != nil {
 		c.JSON(400, gin.H { "errors": "Invalid JSON"})

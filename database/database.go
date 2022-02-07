@@ -15,7 +15,11 @@ var db *gorm.DB
 func StartDatabase () {
 	
 	dsn := "host=database user=postgres password=123456 dbname=vts_database port=5432 sslmode=disable TimeZone=America/Sao_Paulo"
-	database, err := gorm.Open(postgres.Open(dsn), &gorm.Config{})
+	database, err := gorm.Open(postgres.Open(dsn), &gorm.Config{
+		// NowFunc: func() time.Time {
+		// 	return time.Now().Local()
+		// },
+	})
 
 	if err != nil {
 		log.Fatal ("Database error: " + err.Error())

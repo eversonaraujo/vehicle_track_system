@@ -25,7 +25,5 @@ func (s *Server) Run() {
 
 	log.Printf("---------------------- READY ----------------------")
 	log.Printf("Server is running on %v", s.port)
-	log.Printf("---------------------- READY ----------------------")
-	
 	log.Fatal(router.Run(":" + s.port ))
 }

@@ -16,6 +16,9 @@ func ConfigRoutes (router *gin.Engine) *gin.Engine {
 		{
 			vehicle.GET("/", controllers.VehicleList)
 			vehicle.POST("/", controllers.VehicleCreate)
+
+			vehicle.GET("/:id/positions", controllers.PositionList)
+			vehicle.POST("/:id/positions", controllers.PositionCreate)
 		}
 		
 		fleet := main.Group("fleets")

@@ -40,5 +40,22 @@ POST http://localhost:8000/vehicles
 Content-Type: application/json
 
 {
-    "fleet_id": 1, "name": "veículo 1", "max_speed": 70
+    "fleet_id": 1, "name": "veículo 1", "max_speed": 70.3
+}
+
+
+// Positions Calls -----------------------------
+###
+GET http://localhost:8000/vehicles/1/positions
+
+###
+POST http://localhost:8000/vehicles/1/positions
+Content-Type: application/json
+
+{
+    "timestamp": "2020-07-10",
+    "latitude": 39.10398,
+    "longitude": 3.17403,
+    "current_speed": 113.0
+
 }

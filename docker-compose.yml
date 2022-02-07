@@ -9,8 +9,10 @@ services:
             - "8000:8000"
         volumes: 
             - "./:/app"
+        environment:
+            AMQP_SERVER_URL: amqp://guest:guest@message-broker:5672/
         networks:
-            - "vts_net"
+            - vts_net
         depends_on: 
             - database
         restart: always
@@ -25,10 +27,23 @@ services:
             POSTGRES_USER: postgres
             POSTGRES_PASSWORD: 123456
         #volumes:
-        #    - ./database/pgdata:/var/lib/postgresql/data
+        #    - ./var/database/pgdata:/var/lib/postgresql/data
         networks:
             - "vts_net"
 
+    message-broker:
+        image: rabbitmq:3-management-alpine
+        container_name: message-broker
+        ports:
+            - 5672:5672   # Consumer connections
+            - 15672:15672 # RabbitMQ GUI
+        volumes:
+            - "./var/rabbit:/var/lib/rabbitmq"
+            - "./var/rabbit/log:/var/log/rabbitmq"
+        restart: always
+        networks:
+            - vts_net
+    
     adminer:
         image: adminer
         container_name: "vts_adminer"
@@ -37,7 +52,7 @@ services:
         depends_on: 
             - database
         networks:
-            - "vts_net"
+            - vts_net
 
 networks:
     vts_net:
