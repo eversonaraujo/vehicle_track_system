@@ -99,7 +99,7 @@ func PositionCheckSpeed (position models.Position) {
 		var result []string
 		
 		database.GetDabatase().Raw("SELECT alerts.webhook FROM alerts JOIN fleets f " +
-			" ON f.id = alerts.fleet_id JOIN vehicles v ON v.fleet_id = f.id AND v.id = ?", 1).Scan(&result)
+			" ON f.id = alerts.fleet_id JOIN vehicles v ON v.fleet_id = f.id AND v.id = ?", position.VehicleID).Scan(&result)
 
 		log.Print(strings.Join(result, ", "))
 		
