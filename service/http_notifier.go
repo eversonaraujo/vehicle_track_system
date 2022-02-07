@@ -51,7 +51,8 @@ func Notify (message []byte) bool {
 	)
 
 	if err != nil {
-		log.Fatal(err)
+		fmt.Println("Failed: " + err.Error())
+		return false
 	}
 	
 	if resp.StatusCode == 200 {
