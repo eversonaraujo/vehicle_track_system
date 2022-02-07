@@ -1,6 +1,6 @@
 
 
-### Vehicle Track System
+# Vehicle Track System
 
 ## Start the application running
 docker-compose up
