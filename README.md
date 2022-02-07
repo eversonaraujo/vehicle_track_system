@@ -2,8 +2,14 @@
 
 # Vehicle Track System
 
-## Start the application running
-docker-compose up
+## Starting the application
+inside the project directory runs
+docker-compose up 
+
+or
+
+docker-compose up --force-recreate
+
 
 ### Api tests using VCode RestClient 
 api.rest file
