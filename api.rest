@@ -53,9 +53,9 @@ POST http://localhost:8000/vehicles/1/positions
 Content-Type: application/json
 
 {
-    "timestamp": "2020-07-10",
+    "timestamp": "2020-07-10 12:33:34",
     "latitude": 39.10398,
     "longitude": 3.17403,
-    "current_speed": 113.0
+    "current_speed": 120.5
 
 }

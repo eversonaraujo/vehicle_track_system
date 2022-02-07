@@ -67,8 +67,7 @@ func ConsumerInit () {
         for message := range messages {
             log.Printf("Received message")
             log.Printf(" > %s\n", message.Body)
-            
-            // Should be better create 3 queues and send the notification to another queue
+
             if (!service.Notify(message.Body)) {
                 
                 time.Sleep(5 * time.Second)
@@ -81,6 +80,7 @@ func ConsumerInit () {
                     service.Notify(message.Body)
                 }
             }
+
         }
     }()
 
