@@ -1,0 +1,43 @@
+version: "3.8"
+
+services:
+    app:
+        image: golang:1.17
+        container_name: "vts"
+        working_dir: /app
+        ports: 
+            - "8000:8000"
+        volumes: 
+            - "./:/app"
+        networks:
+            - "vts_net"
+        depends_on: 
+            - database
+        restart: always
+        entrypoint: ["go", "run", "main.go"]
+
+    database:
+        image: postgres:13.2
+        container_name: "vts_database"
+        restart: always
+        environment:
+            POSTGRES_DB: vts_database
+            POSTGRES_USER: postgres
+            POSTGRES_PASSWORD: 123456
+        #volumes:
+        #    - ./database/pgdata:/var/lib/postgresql/data
+        networks:
+            - "vts_net"
+
+    adminer:
+        image: adminer
+        container_name: "vts_adminer"
+        ports: 
+            - "8080:8080"
+        depends_on: 
+            - database
+        networks:
+            - "vts_net"
+
+networks:
+    vts_net:

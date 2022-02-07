@@ -1,0 +1,44 @@
+
+###
+GET http://localhost:8000/
+
+###
+GET http://localhost:8000/database
+
+// Fleets Calls -----------------------------
+###
+GET http://localhost:8000/fleets
+
+###
+POST http://localhost:8000/fleets
+Content-Type: application/json
+
+{ 
+    "name": "Veículos de perseguição",
+    "max_speed": 120.5
+}
+
+// Alert Calls -----------------------------
+###
+GET http://localhost:8000/fleets/1/alerts
+
+###
+POST http://localhost:8000/fleets/1/alerts
+Content-Type: application/json
+
+{ 
+    "webhook": "http://localhost:8800/vts/notification"
+}
+
+
+// Vehicle Calls -----------------------------
+###
+GET http://localhost:8000/vehicles
+
+###
+POST http://localhost:8000/vehicles
+Content-Type: application/json
+
+{
+    "fleet_id": 1, "name": "veículo 1", "max_speed": 70
+}
