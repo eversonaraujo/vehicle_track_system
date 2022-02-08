@@ -32,6 +32,13 @@ func VehicleCreate (c *gin.Context) {
 		return
 	}
 	
+	// Validating
+	err = vehicle.Validate() 
+	if err != nil {
+		c.JSON(400, gin.H { "errors": err.Error() })
+		return
+	}
+
 	// Check if Freet exists
 	var fleet models.Fleet
 	err = database.GetDabatase().First(&fleet, vehicle.FleetID).Error

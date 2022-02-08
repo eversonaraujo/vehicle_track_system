@@ -1,6 +1,7 @@
 package controllers
 
 import (
+	"fmt"
 	"strconv"
 	"vts_api/database"
 	"vts_api/models"
@@ -27,7 +28,7 @@ func AlertCreate (c *gin.Context) {
 	fleetID, err := strconv.Atoi(c.Param("id"))
 	
 	if err != nil {
-		c.JSON(400, gin.H { "errors": "Invalida parameter Fleet.ID: " +  err.Error() })
+		c.JSON(400, gin.H { "errors": "Invalid parameter Fleet.ID: " +  err.Error() })
 		return
 	}
 	
@@ -42,13 +43,28 @@ func AlertCreate (c *gin.Context) {
 		return
 	}	
 		
-	// Don`t forget the validation
 	var alert models.Alert
 	err = c.ShouldBindJSON(&alert)
 	alert.FleetID = int(fleet.ID)
 
 	if err != nil {
 		c.JSON(400, gin.H { "errors": "Invalid JSON"})
+		return
+	}
+
+	// Validating
+	err = alert.Validate() 
+	if err != nil {
+		c.JSON(400, gin.H { "errors": err.Error() })
+		return
+	}
+
+	// Check if this alert (url) already exists as alert
+	var count int64
+	database.GetDabatase().Table("alerts").Where("webhook = ? AND fleet_id = ?", alert.Webhook, alert.FleetID).Count(&count)
+	
+	if (count > 0) {
+		c.JSON(400, gin.H { "errors": fmt.Sprintf("This alert (\"%s\") already exists", alert.Webhook )})
 		return
 	}
 

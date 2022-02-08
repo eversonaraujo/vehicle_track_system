@@ -1,6 +1,7 @@
 package controllers
 
 import (
+	"fmt"
 	"vts_api/database"
 	"vts_api/models"
 
@@ -19,10 +20,9 @@ func FleetList (c *gin.Context) {
 	
 	c.JSON(200, fleets)
 }
-
+	
 func FleetCreate (c *gin.Context) {
 
-	// Don`t forget the validation
 	var fleet models.Fleet
 	err := c.ShouldBindJSON(&fleet) 
 	
@@ -30,15 +30,26 @@ func FleetCreate (c *gin.Context) {
 		c.JSON(400, gin.H { "errors": "Invalid JSON"})
 		return
 	}
+	
+	// Validating
+	err = fleet.Validate() 
+	if err != nil {
+		c.JSON(400, gin.H { "errors": err.Error() })
+		return
+	}
+	
+	var count int64
+	database.GetDabatase().Table("fleets").Where("name = ?", fleet.Name).Count(&count)
+	
+	if (count > 0) {
+		c.JSON(400, gin.H { "errors": fmt.Sprintf("The fleet \"%s\" already exists", fleet.Name )})
+		return
+	}
 
 	err = database.GetDabatase().Create(&fleet).Error
 
 	if err != nil {
-
-		c.JSON(400, gin.H {
-			 "errors": "Cannot create a fleet, error: "+ err.Error(),
-		})
-		
+		c.JSON(400, gin.H {"errors": "Cannot create a fleet, error: "+ err.Error() })
 		return
 	}
 

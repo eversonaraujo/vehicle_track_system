@@ -44,6 +44,14 @@ func PositionCreate (c *gin.Context) {
 		return
 	}
 	
+	// Validate fields
+	err = position.Validate() 
+	if err != nil {
+		c.JSON(400, gin.H { "errors": err.Error() })
+		return
+	}
+
+
 	// Check if Freet exists
 	var vehicle models.Vehicle
 	err = database.GetDabatase().First(&vehicle, vehicleID).Error
@@ -69,7 +77,7 @@ func PositionCreate (c *gin.Context) {
 		return
 	} else {
 		position.MaxSpeed = vehicle.MaxSpeed
-	}
+	}	
 
 	// Save the VehiclePosition on Database
 	err = database.GetDabatase().Create(&position).Error

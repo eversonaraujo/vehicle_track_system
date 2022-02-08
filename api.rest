@@ -5,7 +5,7 @@ GET http://localhost:8000/
 ###
 GET http://localhost:8000/database
 
-// Fleets Calls -----------------------------
+// ----------------------------------------------- Fleets -----------------------------
 ###
 GET http://localhost:8000/fleets
 
@@ -13,12 +13,12 @@ GET http://localhost:8000/fleets
 POST http://localhost:8000/fleets
 Content-Type: application/json
 
-{ 
-    "name": "Veículos de perseguição",
-    "max_speed": 120.5
+{
+    "name": "Veículos de Resgate",
+    "max_speed": 120
 }
 
-// Alert Calls -----------------------------
+// ----------------------------------------------- Alert -----------------------------
 ###
 GET http://localhost:8000/fleets/1/alerts
 
@@ -30,8 +30,7 @@ Content-Type: application/json
     "webhook": "http://localhost:8000/webhook"
 }
 
-
-// Vehicle Calls -----------------------------
+// ----------------------------------------------- Vehicle -----------------------------
 ###
 GET http://localhost:8000/vehicles
 
@@ -44,7 +43,7 @@ Content-Type: application/json
 }
 
 
-// Positions Calls -----------------------------
+// -----------------------------------------------Positions -----------------------------
 ###
 GET http://localhost:8000/vehicles/1/positions
 
@@ -53,7 +52,7 @@ POST http://localhost:8000/vehicles/1/positions
 Content-Type: application/json
 
 {
-    "timestamp": "2020-07-10 12:33:34",
+    "timestamp": "2022-10-05 14:48:00.000", 
     "latitude": 39.10398,
     "longitude": 3.17403,
     "current_speed": 120.5
