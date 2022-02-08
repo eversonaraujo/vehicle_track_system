@@ -56,7 +56,7 @@ func Notify (message []byte) bool {
 	}
 	
 	if resp.StatusCode == 200 {
-		fmt.Println("Mensage received!")
+		fmt.Println("Message received!")
 		return true
 	} 
 		

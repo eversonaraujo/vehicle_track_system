@@ -27,7 +27,7 @@ POST http://localhost:8000/fleets/1/alerts
 Content-Type: application/json
 
 { 
-    "webhook": "http://localhost:8800/vts/notification"
+    "webhook": "http://localhost:8000/webhook"
 }
 
 

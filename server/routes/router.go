@@ -11,6 +11,7 @@ func ConfigRoutes (router *gin.Engine) *gin.Engine {
 	{	
 		main.GET("/", controllers.Hello)
 		main.GET("/database", controllers.Reset)
+		main.POST("/webhook", controllers.TestPost)
 
 		vehicle := main.Group("vehicles")
 		{
